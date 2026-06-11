@@ -5,7 +5,7 @@
     "description": "Dhanz Wealth is a premier wealth management firm dedicated to helping individuals and families achieve financial freedom through carefully structured, tailor-made financial plans."
   },
   "logo": "logo.png",
-  "logoDark": "logodark.png",
+  "logoDark": "logo.png",
   "navigation": [
     { "label": "Home", "href": "#home" },
     { "label": "About Us", "href": "#about" },
@@ -36,8 +36,8 @@
     }
   ],
   "heroButtons": [
-    { "label": "WHAT WE OFFER", "href": "#what-we-offer" },
-    { "label": "WE DEAL WITH", "href": "#services" }
+    { "label": "Finalcial Solutions", "href": "#what-we-offer" },
+    { "label": "Asset Platforms", "href": "#services" }
   ],
   "about": {
     "title": "Welcome to Dhanz Wealth",
