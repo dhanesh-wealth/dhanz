@@ -40,7 +40,7 @@
 .floating-btn--contact {
   background: var(--color-brand);
   color: var(--color-accent);
-  border: 1px solid rgba(197, 165, 114, 0.3);
+  border: 1px solid rgba(var(--color-accent-rgb), 0.3);
 }
 
 .floating-btn--contact:hover {

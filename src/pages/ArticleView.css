@@ -33,7 +33,7 @@
   font-weight: 600;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--color-brand);
+  color: var(--color-on-dark);
   background: var(--gradient);
   padding: 0.65rem 1.25rem;
   border-radius: var(--radius-sm);
@@ -43,5 +43,5 @@
 
 .article-view__download:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(197, 165, 114, 0.35);
+  box-shadow: 0 4px 16px rgba(var(--color-accent-rgb), 0.35);
 }

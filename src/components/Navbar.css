@@ -115,7 +115,7 @@
   width: min(320px, 85vw);
   height: 100vh;
   background: var(--color-bg);
-  box-shadow: -8px 0 32px rgba(15, 27, 45, 0.12);
+  box-shadow: -8px 0 32px rgba(var(--color-brand-rgb), 0.12);
   transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1001;
   padding-top: 5.5rem;

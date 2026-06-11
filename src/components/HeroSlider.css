@@ -156,7 +156,7 @@
 }
 
 .hero__arrow:hover {
-  background: rgba(197, 165, 114, 0.25);
+  background: rgba(var(--color-accent-rgb), 0.25);
   border-color: var(--color-accent);
 }
 
