@@ -352,7 +352,7 @@ export default function Admin() {
                     value={youtubeUrl}
                     onChange={(e) => setYoutubeUrl(e.target.value)}
                     required
-                    placeholder="https://www.youtube.com/watch?v=..."
+                    placeholder="https://www.youtube.com/watch?v=... or /live/..."
                   />
                 </label>
                 <label className="admin__checkbox">
