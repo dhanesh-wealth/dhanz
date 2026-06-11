@@ -175,15 +175,15 @@ export default function Admin() {
     return (
       <div className="admin admin--login">
         <div className="admin__card">
-          <h1>CMS Login</h1>
-          <p>Enter your CMS password to manage content.</p>
+          <h1>Dhanz Wealth Admin</h1>
+          <p>Enter your Admin password to manage content.</p>
           <form onSubmit={handleLogin}>
             <div className="admin__password-field">
               <input
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="CMS Password"
+                placeholder="Admin Password"
                 required
                 autoComplete="current-password"
               />
