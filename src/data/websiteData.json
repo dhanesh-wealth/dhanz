@@ -204,16 +204,7 @@
       }
     ]
   },
-  "predefinedArticles": [
-    {
-      "slug": "article2",
-      "route": "/article2",
-      "title": "Invest Smart: The Future of Mobile Portfolio Management",
-      "description": "How digital platforms are transforming the way investors track, manage, and grow their wealth.",
-      "publishedAt": "2026-03-01",
-      "type": "article"
-    }
-  ],
+
   "appLinks": {
     "title": "Download Our App",
     "appStore": "https://apps.apple.com/us/app/ofa-client/id1206294474",
