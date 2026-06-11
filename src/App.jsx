@@ -15,7 +15,7 @@ export default function App() {
         <Route path="/articles/:slug" element={<ArticleView />} />
         {/* <Route path="/article2" element={<Article2 />} /> */}
         <Route path="/videos" element={<Videos />} />
-        <Route path="/dhanzlsadmin" element={<Admin />} />
+        <Route path="/admindhanz" element={<Admin />} />
       </Routes>
     </BrowserRouter>
   );
