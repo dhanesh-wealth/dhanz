@@ -18,6 +18,7 @@ import {
   deleteVideo,
 } from './sanity.js';
 import { MAX_PDF_BYTES, MAX_ARTICLES } from './constants.js';
+import { jsonBodyMiddleware } from './jsonBody.js';
 
 const CMS_PASSWORD = process.env.CMS_PASSWORD || 'dhanz2026';
 
@@ -35,7 +36,13 @@ const MARKET_CACHE_MS = 30000;
 
 export const app = express();
 app.use(cors({ origin: true }));
-app.use(express.json());
+app.use(express.json({
+  limit: '6mb',
+  verify: (req, _res, buf) => {
+    req.rawBody = buf;
+  },
+}));
+app.use(jsonBodyMiddleware);
 
 app.get('/api/health', (_req, res) => {
   res.json({
