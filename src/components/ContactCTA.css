@@ -1,0 +1,126 @@
+.contact {
+  background: var(--color-brand);
+  color: var(--color-on-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 100%;
+  background: radial-gradient(ellipse at top right, rgba(197, 165, 114, 0.12), transparent 70%);
+  pointer-events: none;
+}
+
+.contact__wrapper {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.contact__header {
+  margin-bottom: 3rem;
+}
+
+.section-title--light {
+  color: var(--color-on-dark);
+}
+
+.section-description--light {
+  color: var(--color-on-dark-muted);
+}
+
+.contact__info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+  text-align: left;
+}
+
+.contact__item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 1.5rem 1.75rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.contact__item:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(197, 165, 114, 0.3);
+}
+
+.contact__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  border: 1px solid rgba(197, 165, 114, 0.35);
+  border-radius: var(--radius-sm);
+  background: rgba(197, 165, 114, 0.08);
+}
+
+.contact__item strong {
+  display: block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-accent);
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+
+.contact__item a {
+  color: var(--color-on-dark);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.contact__item a:hover {
+  color: var(--color-accent);
+}
+
+.contact__item address {
+  font-style: normal;
+  line-height: 1.7;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.contact__cta {
+  margin-top: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .contact__info {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .contact__item {
+    flex: 1 1 220px;
+    max-width: 280px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}

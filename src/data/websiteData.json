@@ -1,0 +1,246 @@
+{
+  "site": {
+    "name": "Dhanz Wealth",
+    "tagline": "Your Partner in Financial Excellence",
+    "description": "Dhanz Wealth is a premier wealth management firm dedicated to helping individuals and families achieve financial freedom through carefully structured, tailor-made financial plans."
+  },
+  "logo": "logo.png",
+  "logoDark": "logodark.png",
+  "navigation": [
+    { "label": "Home", "href": "#home" },
+    { "label": "About Us", "href": "#about" },
+    { "label": "What We Offer", "href": "#what-we-offer" },
+    { "label": "Services", "href": "#services" },
+    { "label": "Articles", "href": "/articles" },
+    { "label": "Videos", "href": "/videos" },
+    { "label": "Contact", "href": "#contact" }
+  ],
+  "heroSlides": [
+    {
+      "id": 1,
+      "title": "Enjoy the convenience of our online transaction platform",
+      "subtitle": "Seamless transaction ultimate convenience Moniter your portfolio Anytime, Anywhere!",
+      "image": "hero5.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Achieve financial freedom through carefully structured, tailor-made financial plans.",
+      "subtitle": "Navigating your journey to finanical freedom through carefully structured, tailor-made financial plans!",
+      "image": "hero2.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Enrich your life with our Experience, Expertise and Etiquette.",
+      "subtitle": "Growing your wealth with our mastery in wealth management!",
+      "image": "hero3.jpg"
+    }
+  ],
+  "heroButtons": [
+    { "label": "WHAT WE OFFER", "href": "#what-we-offer" },
+    { "label": "WE DEAL WITH", "href": "#services" }
+  ],
+  "about": {
+    "title": "Welcome to Dhanz Wealth",
+    "description": "Dhanz Wealth is a wealth Management consultancy formed by finance professionals who have around two decades of experience in the Banking and Financial Service Industry, particularly in the areas of Asset Management and Wealth Management.",
+    "objective": {
+      "title": "Our Objective",
+      "description": "Our objective is to cater the investment needs of various classes of investors, specifically focusing the HNI and institutional segment by providing efficient platforms and suitable investment options across various asset classes We intend to enable our investors to get higher risk adjusted returns with the help of our professional expertise and technical knowledge in the relevant areas. We use comprehensive quantitative and qualitative research and analytical methods for bringing the right solutions to our investors by optimally allocating the resources keeping in view of the financial goals andwealth optimization."
+    },
+    "values": {
+      "title": "Core Values",
+      "description": "We believe in building long term relationships and Value addition to our stakeholders with our core values of Probity, Acumen and Trust.",
+      "items": [
+        {
+          "title": "Probity",
+          "description": "We uphold the highest standards of integrity, honesty, and ethical conduct in every decision and client interaction."
+        },
+        {
+          "title": "Acumen",
+          "description": "We bring sharp financial insight, deep market knowledge, and disciplined analysis to deliver sound investment solutions."
+        },
+        {
+          "title": "Trust",
+          "description": "We earn lasting confidence through transparency, accountability, and a steadfast commitment to our clients' interests."
+        }
+      ]
+    }
+  },
+  "whatWeOffer": {
+    "title": "What We Offer",
+    "subtitle": "Comprehensive financial solutions tailored to your unique needs"
+  },
+  "services": [
+    {
+      "id": 1,
+      "title": "Investment Planning",
+      "image": "investment-management.jpg",
+      "shortDescription": "Strategic portfolio management designed to maximize returns while managing risk effectively.",
+      "fullDescription": "Our Investment Management service provides a holistic approach to growing your wealth. We analyze market trends, assess your risk profile, and construct diversified portfolios that align with your financial objectives. From equity and debt instruments to alternative assets, we ensure your investments work harder for you while maintaining prudent risk controls."
+    },
+    {
+      "id": 2,
+      "title": "Child Care Solutions",
+      "image": "childcare.jpg",
+      "shortDescription": "Care for your child's future with our specialized child care solutions.",
+      "fullDescription": "Every financial goal deserves a dedicated strategy. Whether it's funding your child's education, purchasing a dream home, or planning an international vacation, our Goal Based Financial Planning service creates actionable roadmaps with clear timelines, investment allocations, and progress tracking to turn your aspirations into reality."
+    },
+    {
+      "id": 3,
+      "title": "Tax Planning",
+      "image": "tax-planning.jpg",
+      "shortDescription": "Minimize tax liabilities legally while maximizing post-tax returns on your investments.",
+      "fullDescription": "Effective tax planning is integral to wealth creation. Our experts help you navigate complex tax regulations, identify eligible deductions and exemptions, and structure investments in tax-efficient instruments. We ensure you retain more of your hard-earned wealth while remaining fully compliant with applicable laws."
+    },
+    {
+      "id": 4,
+      "title": "Retirement Planning",
+      "image": "retirement1.jpg",
+      "shortDescription": "Secure a comfortable retirement with structured savings and investment strategies.",
+      "fullDescription": "Planning for retirement requires foresight and discipline. Our Retirement Planning service helps you estimate future needs, create sustainable income streams, and build a corpus that ensures financial independence in your golden years. We factor in inflation, healthcare costs, and lifestyle goals to craft a plan that gives you peace of mind."
+    },
+    {
+      "id": 5,
+      "title": "Treasury Solutions",
+      "image": "treasury1.jpg",
+      "shortDescription": "Optimize your corporate treasury operations with expert liquidity and cash flow management.",
+      "fullDescription": "Our Treasury Management Solutions help businesses and high-net-worth individuals optimize cash flow, manage liquidity, and minimize financial risks. We design customized treasury strategies that enhance operational efficiency, reduce borrowing costs, and ensure your capital is deployed optimally across short-term and long-term instruments."
+    },
+
+    {
+      "id": 6,
+      "title": "Family Office",
+      "image": "familyoffice1.jpg",
+      "shortDescription": "Comprehensive wealth stewardship for ultra-high-net-worth families across generations.",
+      "fullDescription": "Our Family Office services provide end-to-end wealth management for affluent families. From investment oversight and tax optimization to estate planning, philanthropy, and succession planning, we serve as your single point of contact for all financial affairs — preserving and growing family wealth across generations."
+    },
+    {
+      "id": 7,
+      "title": "Mutual Funds",
+      "image": "mutualfund.jpg",
+      "shortDescription": "Access a curated selection of mutual funds across categories for diversified growth.",
+      "fullDescription": "Mutual Funds offer an accessible pathway to diversified investing. We help you select the right funds based on your risk appetite, investment horizon, and financial goals. Our research-driven approach covers equity, debt, hybrid, and thematic funds, with regular portfolio reviews to ensure optimal performance alignment."
+    },
+    {
+      "id": 8,
+      "title": "Portfolio Management Services (PMS)",
+      "image": "pms.jpg",
+      "shortDescription": "Discretionary portfolio management for high-net-worth individuals seeking personalized strategies.",
+      "fullDescription": "Our Portfolio Management Services provide bespoke investment solutions for discerning investors. With dedicated portfolio managers, direct equity holdings, and tailored asset allocation, PMS delivers the flexibility and personalization that mass-market products cannot. We focus on alpha generation while maintaining rigorous risk management protocols."
+    },
+    {
+      "id": 9,
+      "title": "Alternative Investment Funds (AIF)",
+      "image": "aif.jpg",
+      "shortDescription": "Explore alternative asset classes for enhanced portfolio diversification and returns.",
+      "fullDescription": "Alternative Investment Funds open doors to private equity, venture capital, real estate, and hedge fund strategies. Our AIF advisory helps qualified investors access institutional-grade opportunities that complement traditional portfolios, offering potential for superior risk-adjusted returns in a carefully vetted framework."
+    },
+    {
+      "id": 10,
+      "title": "Equities",
+      "image": "shares.jpg",
+      "shortDescription": "Direct equity investments backed by in-depth research and market intelligence.",
+      "fullDescription": "Our Shares advisory service provides research-backed recommendations for direct equity investments. We analyze company fundamentals, sector trends, and macroeconomic indicators to identify high-potential stocks. Whether you prefer growth, value, or dividend strategies, we guide you through the equity markets with confidence."
+    },
+    {
+      "id": 11,
+      "title": "Bonds & Fixed Income",
+      "image": "bonds.jpg",
+      "shortDescription": "Fixed-income solutions for stable returns and capital preservation.",
+      "fullDescription": "Bonds form the foundation of a balanced portfolio. We offer access to government securities, corporate bonds, and structured debt instruments that provide predictable income streams. Our bond advisory considers credit ratings, yield curves, and interest rate environments to optimize your fixed-income allocation."
+    },
+    {
+      "id": 12,
+      "title": "Specialized Investment Fund",
+      "image": "sif.jpg",
+      "shortDescription": "Targeted fund strategies designed for specific investment themes, sectors, and risk profiles.",
+      "fullDescription": "Specialized Investment Funds offer focused exposure to defined strategies such as sector-specific equities, thematic investing, credit opportunities, and structured products. We help investors identify the right specialized funds aligned with their objectives, risk tolerance, and portfolio allocation needs — backed by rigorous due diligence and ongoing performance monitoring."
+    },
+    {
+      "id": 13,
+      "title": "Insurance",
+      "image": "insurance.jpg",
+      "shortDescription": "Protect your family and assets with our comprehensive insurance solutions.",
+      "fullDescription": "Insurance is a critical component of financial planning. We offer a range of insurance products tailored to your needs, including life insurance, health insurance, and property insurance. Our insurance solutions help you safeguard your family, assets, and future from unforeseen events, providing peace of mind and financial security."
+    }
+  ],
+  "serviceDetails": {
+    "title": "We Deal With",
+    "subtitle": "In-depth expertise across a wide spectrum of financial instruments and services"
+  },
+  "contact": {
+    "title": "Get In Touch",
+    "subtitle": "Ready to take control of your financial future? Contact us today for a personalized consultation.",
+    "phone": "+91 99469 24365",
+    "email": "info@dhanzwealth.com",
+    "address": "123 Financial District, Mumbai, Maharashtra 400001, India",
+    "whatsapp": "919946924365",
+    "whatsappGreeting": "Hello! I am interested in Dhanz Wealth services. Could you please guide me?",
+    "ctaText": "Schedule a Consultation"
+  },
+  "article2": {
+    "title": "Invest Smart: The Future of Mobile Portfolio Management",
+    "subtitle": "How digital platforms are transforming the way investors track, manage, and grow their wealth.",
+    "author": "Dhanz Wealth Research Team",
+    "publishedAt": "2026-03-01",
+    "readTime": "6 min read",
+    "image": "sif.jpg",
+    "category": "Market Insights",
+    "sections": [
+      {
+        "heading": "The Shift to Mobile-First Investing",
+        "body": "Today's investors expect real-time access to their portfolios from anywhere. Mobile investment platforms have moved from convenience to necessity, enabling clients to monitor performance, execute transactions, and receive market alerts instantly. At Dhanz Wealth, we embrace this shift by offering a seamless digital experience alongside expert advisory support."
+      },
+      {
+        "heading": "Why Specialized Investment Funds Matter",
+        "body": "Specialized Investment Funds (SIFs) provide targeted exposure to specific themes, sectors, and risk profiles that broad-market funds cannot replicate. Whether you seek thematic equity strategies, credit opportunities, or structured products, SIFs allow precise alignment with your financial goals. Our research team conducts rigorous due diligence to identify funds that deliver consistent, risk-adjusted returns."
+      },
+      {
+        "heading": "Building a Balanced Portfolio",
+        "body": "A well-constructed portfolio balances growth assets with stable income generators. Equities drive long-term capital appreciation, while bonds and fixed-income instruments provide stability during market volatility. Combining mutual funds, PMS, and specialized funds within a disciplined asset allocation framework helps investors navigate economic cycles with confidence."
+      },
+      {
+        "heading": "The Dhanz Wealth Advantage",
+        "body": "With nearly two decades of experience in asset and wealth management, Dhanz Wealth combines institutional-grade research with personalized client service. Our mobile platform lets you track your portfolio anytime, anywhere — while our advisors ensure every investment decision aligns with your long-term objectives. Download our app to get started on your wealth journey today."
+      }
+    ]
+  },
+  "predefinedArticles": [
+    {
+      "slug": "article2",
+      "route": "/article2",
+      "title": "Invest Smart: The Future of Mobile Portfolio Management",
+      "description": "How digital platforms are transforming the way investors track, manage, and grow their wealth.",
+      "publishedAt": "2026-03-01",
+      "type": "article"
+    }
+  ],
+  "appLinks": {
+    "title": "Download Our App",
+    "appStore": "https://apps.apple.com/us/app/ofa-client/id1206294474",
+    "playStore": "https://play.google.com/store/apps/details?id=com.dhanzwealth",
+    "appStoreLabel": "Download on the App Store",
+    "playStoreLabel": "Get it on Google Play"
+  },
+  "footer": {
+    "description": "Dhanz Wealth is your trusted partner in navigating the complex world of finance. We deliver personalized wealth management solutions that help you achieve your financial goals with confidence.",
+    "quickLinks": [
+      { "label": "Home", "href": "#home" },
+      { "label": "About Us", "href": "#about" },
+      { "label": "What We Offer", "href": "#what-we-offer" },
+      { "label": "Services", "href": "#services" },
+      { "label": "Articles", "href": "/articles" },
+      { "label": "Videos", "href": "/videos" },
+      { "label": "Contact", "href": "#contact" }
+    ],
+    "serviceLinks": [
+      { "label": "Mutual Funds", "href": "#services" },
+      { "label": "PMS", "href": "#services" },
+      { "label": "AIF", "href": "#services" },
+      { "label": "Shares", "href": "#services" },
+      { "label": "Bonds", "href": "#services" },
+      { "label": "Family Office", "href": "#services" },
+      { "label": "Specialized Investment Fund", "href": "#services" }
+    ],
+    "copyright": "© 2026 Dhanz Wealth. All rights reserved."
+  }
+}

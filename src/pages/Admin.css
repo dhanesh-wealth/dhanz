@@ -1,0 +1,329 @@
+.admin {
+  min-height: 100vh;
+  background: var(--color-bg-light);
+}
+
+.admin--login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.admin__card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 2.5rem;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: var(--shadow-md);
+}
+
+.admin__card h1 {
+  font-family: var(--font-serif);
+  color: var(--color-heading);
+  margin-bottom: 0.5rem;
+}
+
+.admin__card p {
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.admin__card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.admin__card input {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 0.95rem;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.admin__card button {
+  padding: 0.75rem;
+  background: var(--color-brand);
+  color: var(--color-on-dark);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin__home-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
+.admin__header {
+  background: var(--color-brand);
+  color: var(--color-on-dark);
+  padding: 1.25rem 0;
+}
+
+.admin__header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin__header h1 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+}
+
+.admin__tabs {
+  display: flex;
+  gap: 0;
+  background: var(--color-brand);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0 1.25rem;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.admin__tabs button {
+  padding: 0.85rem 1.5rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.admin__tabs button:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.admin__tabs button.active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+}
+
+.admin__message {
+  grid-column: 1 / -1;
+  margin-top: 0;
+}
+
+.admin__header-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.admin__header-actions a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.admin__header-actions button {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: var(--color-on-dark);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.admin__body {
+  padding: 2.5rem 1.25rem 4rem;
+  display: grid;
+  gap: 2.5rem;
+}
+
+.admin__hint {
+  margin: -0.75rem 0 1.25rem;
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+}
+
+.admin__form-section,
+.admin__list-section {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+}
+
+.admin__form-section h2,
+.admin__list-section h2 {
+  font-family: var(--font-serif);
+  color: var(--color-heading);
+  margin-bottom: 1.5rem;
+  font-size: 1.35rem;
+}
+
+.admin__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.admin__form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.admin__form input[type="text"],
+.admin__form textarea,
+.admin__form input[type="file"] {
+  font-family: inherit;
+  font-size: 0.95rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.admin__checkbox {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 0.6rem !important;
+  font-weight: 500 !important;
+}
+
+.admin__submit {
+  align-self: flex-start;
+  padding: 0.85rem 2rem;
+  background: var(--gradient);
+  color: var(--color-brand);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.admin__submit:hover {
+  transform: translateY(-1px);
+}
+
+.admin__error {
+  color: #c0392b;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.admin__success {
+  color: var(--color-secondary);
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+.admin__empty {
+  color: var(--color-text-muted);
+}
+
+.admin__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.admin__item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--color-bg-light);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+}
+
+.admin__item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.admin__item-info strong {
+  color: var(--color-heading);
+}
+
+.admin__item-info small {
+  color: var(--color-text-light);
+  font-size: 0.8rem;
+}
+
+.admin__badge {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  width: fit-content;
+}
+
+.admin__badge.published {
+  background: rgba(61, 107, 94, 0.15);
+  color: var(--color-secondary);
+}
+
+.admin__badge.draft {
+  background: rgba(197, 165, 114, 0.15);
+  color: var(--color-accent-dark);
+}
+
+.admin__item-actions {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.admin__item-actions a,
+.admin__item-actions button {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.admin__item-actions button.danger {
+  color: #c0392b;
+  border-color: rgba(192, 57, 43, 0.3);
+}
+
+@media (min-width: 1024px) {
+  .admin__body {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+}
