@@ -6,9 +6,13 @@
 [functions]
   node_bundler = "esbuild"
   included_files = ["server/**"]
+  external_node_modules = ["@sanity/client"]
 
 [functions.api]
   timeout = 26
+
+[build.environment]
+  NODE_VERSION = "20"
 
 # API routes → Netlify Function (must be before SPA fallback)
 [[redirects]]
