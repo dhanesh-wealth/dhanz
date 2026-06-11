@@ -48,6 +48,17 @@
   color: var(--color-text);
 }
 
+.admin__password-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.admin__password-field input {
+  width: 100%;
+  padding-right: 2.75rem;
+}
+
 .admin__card button {
   padding: 0.75rem;
   background: var(--color-brand);
@@ -56,6 +67,30 @@
   border-radius: var(--radius-sm);
   font-weight: 600;
   cursor: pointer;
+}
+
+.admin__card button.admin__password-toggle {
+  position: absolute;
+  right: 0.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-weight: 400;
+}
+
+.admin__card button.admin__password-toggle svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+.admin__card button.admin__password-toggle:hover {
+  color: var(--color-brand);
+  background: transparent;
 }
 
 .admin__home-link {

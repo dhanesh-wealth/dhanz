@@ -14,13 +14,40 @@
 [build.environment]
   NODE_VERSION = "20"
 
-# API routes → Netlify Function (must be before SPA fallback)
+# API routes → Netlify Function (before SPA rules)
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/api"
   status = 200
+  force = true
 
-# React Router — all other routes serve index.html
+# React Router pages — explicit routes for refresh / direct links
+[[redirects]]
+  from = "/articles"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/articles/*"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/videos"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/admindhanz"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/dhanzlsadmin"
+  to = "/index.html"
+  status = 200
+
+# SPA fallback — all other non-file paths
 [[redirects]]
   from = "/*"
   to = "/index.html"
