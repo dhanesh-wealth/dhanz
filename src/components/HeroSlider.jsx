@@ -105,7 +105,7 @@ export default function HeroSlider({ data }) {
               decoding={index === 0 ? 'sync' : 'async'}
               fetchPriority={index === 0 ? 'high' : 'low'}
             />
-            <div className="hero__overlay" />
+            <div className="hero__overlay" aria-hidden="true" />
           </div>
         ))}
       </div>

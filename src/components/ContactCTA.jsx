@@ -17,9 +17,9 @@ export default function ContactCTA({ data }) {
           variants={staggerContainer}
         >
           <motion.div className="contact__header" variants={fadeUp}>
-            <span className="section-eyebrow section-eyebrow--light">Get In Touch</span>
-            <h2 className="section-title section-title--light">{contact.title}</h2>
-            <p className="section-description section-description--light">{contact.subtitle}</p>
+            <span className="section-eyebrow">Get In Touch</span>
+            <h2 className="section-title">{contact.title}</h2>
+            <p className="section-description">{contact.subtitle}</p>
           </motion.div>
 
           <motion.div className="contact__info" variants={fadeUp}>

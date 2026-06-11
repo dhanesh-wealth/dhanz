@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import Logo from './Logo';
 import './Navbar.css';
@@ -30,14 +30,34 @@ function NavLink({ item, onClick }) {
 export default function Navbar({ data, className = '' }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const lastScrollY = useRef(0);
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 10);
+    const scrollThreshold = 8;
+    const minScroll = 72;
+
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      setScrolled(currentY > 10);
+
+      if (menuOpen || currentY < minScroll) {
+        setHidden(false);
+      } else if (currentY > lastScrollY.current + scrollThreshold) {
+        setHidden(true);
+      } else if (currentY < lastScrollY.current - scrollThreshold) {
+        setHidden(false);
+      }
+
+      lastScrollY.current = currentY;
+    };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [menuOpen]);
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
@@ -70,7 +90,10 @@ export default function Navbar({ data, className = '' }) {
   };
 
   return (
-    <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''} ${className}`.trim()} role="banner">
+    <header
+      className={`navbar ${scrolled ? 'navbar--scrolled' : ''} ${hidden ? 'navbar--hidden' : ''} ${className}`.trim()}
+      role="banner"
+    >
       <div className="navbar__container">
         <a
           href="/"

@@ -7,11 +7,20 @@
   background: var(--color-navbar-bg);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--color-border);
-  transition: box-shadow 0.3s ease, border-color 0.3s ease, top 0.2s ease;
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    top 0.2s ease,
+    transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.navbar--hidden {
+  transform: translateY(-100%);
 }
 
 .navbar--with-ticker {
-  top: 38px;
+  top: var(--ticker-height);
 }
 
 .navbar--scrolled {
@@ -25,11 +34,11 @@
   justify-content: space-between;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0.85rem 1.25rem;
+  padding: var(--navbar-padding-y) 1.25rem;
 }
 
 .navbar__logo img {
-  height: 48px;
+  height: var(--navbar-logo-height);
   width: auto;
   max-width: 200px;
   display: block;
@@ -159,11 +168,7 @@
 
 @media (min-width: 768px) {
   .navbar__container {
-    padding: 1rem 2rem;
-  }
-
-  .navbar__logo img {
-    height: 52px;
+    padding: var(--navbar-padding-y) 2rem;
   }
 }
 
@@ -174,5 +179,16 @@
 
   .navbar__hamburger {
     display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar {
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  .navbar--hidden {
+    transform: none;
+    visibility: hidden;
   }
 }

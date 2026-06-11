@@ -1,18 +1,18 @@
 :root {
-  --color-brand: #0A599B;
-  --color-brand-light: #0c6eb5;
-  --color-heading: #083d6b;
-  --color-accent: #61a842;
-  --color-accent-dark: #4f9035;
-  --color-secondary: #61a842;
-  --color-brand-rgb: 10, 89, 155;
-  --color-accent-rgb: 97, 168, 66;
+  --color-brand: #61a842;
+  --color-brand-light: #72b852;
+  --color-heading: #3a6828;
+  --color-accent: #0A599B;
+  --color-accent-dark: #084a7d;
+  --color-secondary: #0A599B;
+  --color-brand-rgb: 97, 168, 66;
+  --color-accent-rgb: 10, 89, 155;
   --color-text: #1a1a1a;
   --color-text-muted: #5c5c5c;
   --color-text-light: #8a8a8a;
   --color-bg: #ffffff;
-  --color-bg-light: #f5f8fb;
-  --color-bg-cream: #f8faf6;
+  --color-bg-light: #f8faf6;
+  --color-bg-cream: #f5f8fb;
   --color-surface: #ffffff;
   --color-border: #e2e8ef;
   --color-navbar-bg: rgba(255, 255, 255, 0.97);
@@ -21,7 +21,7 @@
   --color-on-dark-muted: rgba(255, 255, 255, 0.72);
   --color-primary: var(--color-brand);
   --color-primary-light: var(--color-brand-light);
-  --gradient: linear-gradient(135deg, #0A599B 0%, #61a842 100%);
+  --gradient: linear-gradient(135deg, #61a842 0%, #0A599B 100%);
   --gradient-hero: linear-gradient(
     135deg,
     rgba(var(--color-brand-rgb), 0.97) 0%,
@@ -36,6 +36,11 @@
   --shadow-md: 0 4px 20px rgba(var(--color-brand-rgb), 0.1);
   --shadow-lg: 0 12px 40px rgba(var(--color-brand-rgb), 0.14);
   --section-padding: 4.5rem 0;
+  --ticker-height: 38px;
+  --navbar-padding-y: 0.85rem;
+  --navbar-logo-height: 48px;
+  --navbar-height: calc(var(--navbar-padding-y) * 2 + var(--navbar-logo-height) + 1px);
+  --site-header-height: calc(var(--ticker-height) + var(--navbar-height));
   --font-serif: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --font-sans: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
@@ -58,9 +63,9 @@
     --shadow-lg: 0 12px 40px rgba(0, 0, 0, 0.35);
     --gradient-hero: linear-gradient(
       135deg,
-      rgba(4, 20, 36, 0.97) 0%,
+      rgba(12, 28, 8, 0.97) 0%,
       rgba(var(--color-brand-rgb), 0.92) 50%,
-      rgba(4, 20, 36, 0.96) 100%
+      rgba(12, 28, 8, 0.96) 100%
     );
   }
 }
@@ -205,6 +210,8 @@ button {
 
   :root {
     --section-padding: 5.5rem 0;
+    --navbar-padding-y: 1rem;
+    --navbar-logo-height: 52px;
   }
 }
 
