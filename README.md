@@ -352,7 +352,7 @@ Update `contact` in `websiteData.json`:
 ```json
 {
   "phone": "+91 99469 24365",
-  "email": "info@dhanzwealth.com",
+  "email": "dhanesh@dhanzwealth.com",
   "whatsapp": "919946924365",
   "whatsappGreeting": "Hello! I am interested in Dhanz Wealth services..."
 }
