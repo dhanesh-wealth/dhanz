@@ -124,6 +124,19 @@ export default function Footer({ data }) {
 
         <div className="footer__bottom">
           <p>{footer.copyright}</p>
+          {footer.credit && (
+            <p className="footer__credit">
+              {footer.credit.prefix}{' '}
+              <a
+                href={footer.credit.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer__credit-link"
+              >
+                {footer.credit.company}
+              </a>
+            </p>
+          )}
         </div>
       </div>
     </footer>

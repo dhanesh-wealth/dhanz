@@ -29,6 +29,10 @@
   margin-bottom: 1.5rem;
 }
 
+.footer__credit-link {
+  color: #41287b !important;
+}
+
 .footer__apps h3 {
   font-family: var(--font-serif);
   color: var(--color-heading);
@@ -127,7 +131,11 @@
 
 .footer__bottom {
   padding: 1.75rem 0;
-  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
 }
 
 .footer__bottom p {
@@ -135,6 +143,35 @@
   color: var(--color-text-light);
   margin: 0;
   letter-spacing: 0.02em;
+}
+
+.footer__credit {
+  font-size: 0.75rem !important;
+  color: var(--color-text-muted);
+  text-align: right;
+}
+
+.footer__credit a {
+  color: var(--color-accent);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.footer__credit a:hover {
+  color: var(--color-heading);
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .footer__bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer__credit {
+    text-align: center;
+  }
 }
 
 @media (min-width: 768px) {

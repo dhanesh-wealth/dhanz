@@ -232,6 +232,11 @@
       { "label": "Family Office", "href": "#services" },
       { "label": "Specialized Investment Fund", "href": "#services" }
     ],
-    "copyright": "© 2026 Dhanz Wealth. All rights reserved."
+    "copyright": "© 2026 Dhanz Wealth. All rights reserved.",
+    "credit": {
+      "prefix": "Developed and maintained by",
+      "company": "LSofito Innovations",
+      "url": "https://lsofito.com"
+    }
   }
 }
