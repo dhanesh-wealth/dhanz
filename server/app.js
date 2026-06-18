@@ -145,6 +145,31 @@ app.get('/api/articles', async (_req, res) => {
   }
 });
 
+app.get('/api/articles/:slug/pdf', async (req, res) => {
+  try {
+    const article = await getArticleBySlug(req.params.slug);
+    if (!article?.pdfUrl) {
+      return res.status(404).json({ error: 'PDF not found' });
+    }
+
+    const pdfRes = await fetch(article.pdfUrl);
+    if (!pdfRes.ok) {
+      return res.status(502).json({ error: 'Failed to fetch PDF from storage' });
+    }
+
+    const buffer = Buffer.from(await pdfRes.arrayBuffer());
+    const filename = (article.pdfFile || `${article.slug}.pdf`).replace(/[^\w.\-() ]/g, '_');
+    const disposition = req.query.download === '1' ? 'attachment' : 'inline';
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `${disposition}; filename="${filename}"`);
+    res.setHeader('Cache-Control', 'public, max-age=3600');
+    res.send(buffer);
+  } catch {
+    res.status(500).json({ error: 'Failed to load PDF' });
+  }
+});
+
 app.get('/api/articles/:slug', async (req, res) => {
   try {
     const article = await getArticleBySlug(req.params.slug);

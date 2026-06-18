@@ -1,9 +1,10 @@
 import { useState, useEffect, lazy, Suspense } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Layout, { PageHeader } from '../components/Layout';
+import PdfViewerErrorBoundary from '../components/PdfViewerErrorBoundary';
 
 const PdfViewer = lazy(() => import('../components/PdfViewer'));
-import { fetchArticle } from '../api/articles';
+import { fetchArticle, getArticlePdfUrl } from '../api/articles';
 import './ArticleView.css';
 
 export default function ArticleView() {
@@ -40,6 +41,9 @@ export default function ArticleView() {
     );
   }
 
+  const pdfViewUrl = getArticlePdfUrl(article.slug);
+  const pdfDownloadUrl = getArticlePdfUrl(article.slug, { download: true });
+
   return (
     <Layout>
       <PageHeader
@@ -58,17 +62,26 @@ export default function ArticleView() {
               })}
             </time>
             <a
-              href={article.pdfUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href={pdfDownloadUrl}
               className="article-view__download"
+              download
             >
               Download PDF
             </a>
           </div>
-          <Suspense fallback={<div className="article-view__status">Loading PDF viewer…</div>}>
-            <PdfViewer url={article.pdfUrl} title={article.title} />
-          </Suspense>
+          <PdfViewerErrorBoundary
+            url={pdfViewUrl}
+            title={article.title}
+            downloadUrl={pdfDownloadUrl}
+          >
+            <Suspense fallback={<div className="article-view__status">Loading PDF viewer…</div>}>
+              <PdfViewer
+                url={pdfViewUrl}
+                title={article.title}
+                downloadUrl={pdfDownloadUrl}
+              />
+            </Suspense>
+          </PdfViewerErrorBoundary>
         </div>
       </section>
     </Layout>

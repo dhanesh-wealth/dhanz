@@ -6,18 +6,41 @@ import './PdfViewer.css';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
-export default function PdfViewer({ url, title }) {
+function NativePdfViewer({ url, title, downloadUrl }) {
+  return (
+    <div className="pdf-viewer pdf-viewer--fallback">
+      <iframe
+        src={`${url}#toolbar=1&navpanes=0`}
+        title={title}
+        className="pdf-viewer__iframe"
+      />
+      <div className="pdf-viewer__actions">
+        <a href={downloadUrl || url} className="pdf-viewer__open-link" download>
+          Download PDF
+        </a>
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="pdf-viewer__open-link"
+        >
+          Open in new tab
+        </a>
+      </div>
+    </div>
+  );
+}
+
+export default function PdfViewer({ url, title, downloadUrl }) {
   const [numPages, setNumPages] = useState(null);
   const [containerWidth, setContainerWidth] = useState(0);
   const [pdfData, setPdfData] = useState(null);
-  const [loadError, setLoadError] = useState('');
   const [useFallback, setUseFallback] = useState(false);
   const containerRef = useRef(null);
 
   useEffect(() => {
     setNumPages(null);
     setPdfData(null);
-    setLoadError('');
     setUseFallback(false);
 
     const controller = new AbortController();
@@ -29,55 +52,45 @@ export default function PdfViewer({ url, title }) {
       })
       .then((buffer) => setPdfData({ data: buffer }))
       .catch((err) => {
-        if (err.name !== 'AbortError') {
-          setUseFallback(true);
-        }
+        if (err.name !== 'AbortError') setUseFallback(true);
       });
 
     return () => controller.abort();
   }, [url]);
 
   useEffect(() => {
+    if (useFallback || !pdfData) return undefined;
+
     const node = containerRef.current;
     if (!node) return undefined;
 
-    const observer = new ResizeObserver((entries) => {
-      setContainerWidth(entries[0].contentRect.width);
-    });
-    observer.observe(node);
-    setContainerWidth(node.offsetWidth);
-    return () => observer.disconnect();
-  }, [useFallback]);
+    const updateWidth = () => {
+      setContainerWidth(node.getBoundingClientRect().width);
+    };
 
-  const pageWidth = containerWidth ? Math.min(containerWidth, 900) : undefined;
+    updateWidth();
+
+    const observer = new ResizeObserver(updateWidth);
+    observer.observe(node);
+    window.addEventListener('resize', updateWidth);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', updateWidth);
+    };
+  }, [useFallback, pdfData]);
 
   if (useFallback) {
-    return (
-      <div className="pdf-viewer pdf-viewer--fallback">
-        <iframe
-          src={`${url}#toolbar=1&navpanes=0`}
-          title={title}
-          className="pdf-viewer__iframe"
-        />
-      </div>
-    );
-  }
-
-  if (loadError) {
-    return (
-      <div className="pdf-viewer pdf-viewer--fallback">
-        <iframe
-          src={`${url}#toolbar=1&navpanes=0`}
-          title={title}
-          className="pdf-viewer__iframe"
-        />
-      </div>
-    );
+    return <NativePdfViewer url={url} title={title} downloadUrl={downloadUrl} />;
   }
 
   if (!pdfData) {
     return <div className="pdf-viewer__loading">Loading PDF…</div>;
   }
+
+  const pageWidth = containerWidth > 0
+    ? Math.min(containerWidth, 900)
+    : Math.min(Math.max(window.innerWidth - 40, 280), 900);
 
   return (
     <div className="pdf-viewer" ref={containerRef}>
@@ -96,12 +109,25 @@ export default function PdfViewer({ url, title }) {
               <Page
                 pageNumber={i + 1}
                 width={pageWidth}
-                renderTextLayer
-                renderAnnotationLayer
+                renderTextLayer={false}
+                renderAnnotationLayer={false}
               />
             </div>
           ))}
       </Document>
+      <div className="pdf-viewer__actions">
+        <a href={downloadUrl || url} className="pdf-viewer__open-link" download>
+          Download PDF
+        </a>
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="pdf-viewer__open-link"
+        >
+          Open in new tab
+        </a>
+      </div>
     </div>
   );
 }

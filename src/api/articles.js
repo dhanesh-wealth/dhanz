@@ -1,5 +1,10 @@
 import { API_BASE } from './config';
 
+export function getArticlePdfUrl(slug, { download = false } = {}) {
+  const query = download ? '?download=1' : '';
+  return `${API_BASE}/articles/${encodeURIComponent(slug)}/pdf${query}`;
+}
+
 export async function fetchArticles() {
   const res = await fetch(`${API_BASE}/articles`);
   if (!res.ok) throw new Error('Failed to fetch articles');
