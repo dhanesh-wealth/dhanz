@@ -25,6 +25,9 @@ export default function Admin() {
   const [articles, setArticles] = useState([]);
   const [videos, setVideos] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [deletingId, setDeletingId] = useState(null);
+  const [deleteTarget, setDeleteTarget] = useState(null);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -34,6 +37,8 @@ export default function Admin() {
   const [published, setPublished] = useState(true);
   const [youtubeUrl, setYoutubeUrl] = useState('');
   const fileRef = useRef(null);
+
+  const isBusy = loading || uploading || Boolean(deletingId);
 
   const loadAll = async (pwd = password) => {
     setLoading(true);
@@ -106,6 +111,7 @@ export default function Admin() {
     formData.append('published', published);
     formData.append('pdf', file);
 
+    setUploading(true);
     try {
       await adminCreateArticle(password, formData);
       resetForm();
@@ -113,6 +119,8 @@ export default function Admin() {
       await loadAll();
     } catch (err) {
       setError(err.message);
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -121,6 +129,7 @@ export default function Admin() {
     setError('');
     setSuccess('');
 
+    setUploading(true);
     try {
       await adminCreateVideo(password, { title, description, youtubeUrl, published });
       resetForm();
@@ -128,6 +137,8 @@ export default function Admin() {
       await loadAll();
     } catch (err) {
       setError(err.message);
+    } finally {
+      setUploading(false);
     }
   };
 
@@ -149,25 +160,37 @@ export default function Admin() {
     }
   };
 
-  const handleDeleteArticle = async (id) => {
-    if (!confirm('Delete this article and its PDF?')) return;
-    try {
-      await adminDeleteArticle(password, id);
-      setSuccess('Article deleted.');
-      await loadAll();
-    } catch (err) {
-      setError(err.message);
-    }
+  const openDeleteModal = (type, id, itemTitle) => {
+    setDeleteTarget({ type, id, title: itemTitle });
   };
 
-  const handleDeleteVideo = async (id) => {
-    if (!confirm('Delete this video?')) return;
+  const closeDeleteModal = () => {
+    if (deletingId) return;
+    setDeleteTarget(null);
+  };
+
+  const confirmDelete = async () => {
+    if (!deleteTarget) return;
+
+    const { type, id } = deleteTarget;
+    setDeletingId(id);
+    setError('');
+    setSuccess('');
+
     try {
-      await adminDeleteVideo(password, id);
-      setSuccess('Video deleted.');
+      if (type === 'article') {
+        await adminDeleteArticle(password, id);
+        setSuccess('Article deleted.');
+      } else {
+        await adminDeleteVideo(password, id);
+        setSuccess('Video deleted.');
+      }
+      setDeleteTarget(null);
       await loadAll();
     } catch (err) {
       setError(err.message);
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -220,13 +243,49 @@ export default function Admin() {
 
   return (
     <div className="admin">
+      {(uploading || deletingId) && (
+        <div className="admin__loader" role="status" aria-live="polite">
+          <div className="admin__loader-card">
+            <span className="admin__spinner" aria-hidden="true" />
+            <p>{uploading ? 'Uploading…' : 'Deleting…'}</p>
+          </div>
+        </div>
+      )}
+
+      {deleteTarget && (
+        <div className="admin__modal-backdrop" onClick={closeDeleteModal} role="presentation">
+          <div
+            className="admin__modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="admin-delete-title"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 id="admin-delete-title">Delete {deleteTarget.type === 'article' ? 'article' : 'video'}?</h2>
+            <p>
+              {deleteTarget.type === 'article'
+                ? `This will permanently delete "${deleteTarget.title}" and its PDF file.`
+                : `This will permanently delete "${deleteTarget.title}".`}
+            </p>
+            <div className="admin__modal-actions">
+              <button type="button" className="admin__modal-cancel" onClick={closeDeleteModal} disabled={Boolean(deletingId)}>
+                Cancel
+              </button>
+              <button type="button" className="admin__modal-delete" onClick={confirmDelete} disabled={Boolean(deletingId)}>
+                {deletingId ? 'Deleting…' : 'Delete'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <header className="admin__header">
         <div className="admin__header-inner">
           <h1>Content CMS</h1>
           <div className="admin__header-actions">
             <Link to="/articles">Articles</Link>
             <Link to="/videos">Videos</Link>
-            <button type="button" onClick={handleLogout}>Logout</button>
+            <button type="button" onClick={handleLogout} disabled={isBusy}>Logout</button>
           </div>
         </div>
       </header>
@@ -236,6 +295,7 @@ export default function Admin() {
           type="button"
           className={tab === 'articles' ? 'active' : ''}
           onClick={() => { setTab('articles'); setError(''); setSuccess(''); }}
+          disabled={isBusy}
         >
           Articles ({articles.length})
         </button>
@@ -243,6 +303,7 @@ export default function Admin() {
           type="button"
           className={tab === 'videos' ? 'active' : ''}
           onClick={() => { setTab('videos'); setError(''); setSuccess(''); }}
+          disabled={isBusy}
         >
           Videos ({videos.length})
         </button>
@@ -259,11 +320,11 @@ export default function Admin() {
               <form onSubmit={handleArticleSubmit} className="admin__form">
                 <label>
                   Title *
-                  <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
+                  <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required disabled={uploading} />
                 </label>
                 <label>
                   Description
-                  <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={3} />
+                  <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={3} disabled={uploading} />
                 </label>
                 <label>
                   PDF File * (max 1 MB)
@@ -272,7 +333,7 @@ export default function Admin() {
                     type="file"
                     accept="application/pdf"
                     required
-                    disabled={articles.length >= MAX_ARTICLES}
+                    disabled={articles.length >= MAX_ARTICLES || uploading}
                     onChange={(e) => {
                       const f = e.target.files?.[0];
                       if (f && f.size > MAX_PDF_BYTES) {
@@ -285,15 +346,15 @@ export default function Admin() {
                   />
                 </label>
                 <label className="admin__checkbox">
-                  <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} />
+                  <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} disabled={uploading} />
                   Publish immediately
                 </label>
                 <button
                   type="submit"
                   className="admin__submit"
-                  disabled={articles.length >= MAX_ARTICLES}
+                  disabled={articles.length >= MAX_ARTICLES || uploading}
                 >
-                  Upload & Publish
+                  {uploading ? 'Uploading…' : 'Upload & Publish'}
                 </button>
               </form>
             </section>
@@ -317,11 +378,16 @@ export default function Admin() {
                         {article.published && (
                           <Link to={`/articles/${article.slug}`} target="_blank">View</Link>
                         )}
-                        <button type="button" onClick={() => toggleArticlePublish(article)}>
+                        <button type="button" onClick={() => toggleArticlePublish(article)} disabled={isBusy}>
                           {article.published ? 'Unpublish' : 'Publish'}
                         </button>
-                        <button type="button" className="danger" onClick={() => handleDeleteArticle(article.id)}>
-                          Delete
+                        <button
+                          type="button"
+                          className="danger"
+                          onClick={() => openDeleteModal('article', article.id, article.title)}
+                          disabled={isBusy}
+                        >
+                          {deletingId === article.id ? 'Deleting…' : 'Delete'}
                         </button>
                       </div>
                     </li>
@@ -339,11 +405,11 @@ export default function Admin() {
               <form onSubmit={handleVideoSubmit} className="admin__form">
                 <label>
                   Title *
-                  <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required placeholder="Video title" />
+                  <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required placeholder="Video title" disabled={uploading} />
                 </label>
                 <label>
                   Description
-                  <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={3} placeholder="Short description (optional)" />
+                  <textarea value={description} onChange={(e) => setDescription(e.target.value)} rows={3} placeholder="Short description (optional)" disabled={uploading} />
                 </label>
                 <label>
                   YouTube URL *
@@ -353,13 +419,16 @@ export default function Admin() {
                     onChange={(e) => setYoutubeUrl(e.target.value)}
                     required
                     placeholder="https://www.youtube.com/watch?v=... or /live/..."
+                    disabled={uploading}
                   />
                 </label>
                 <label className="admin__checkbox">
-                  <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} />
+                  <input type="checkbox" checked={published} onChange={(e) => setPublished(e.target.checked)} disabled={uploading} />
                   Publish immediately
                 </label>
-                <button type="submit" className="admin__submit">Add Video</button>
+                <button type="submit" className="admin__submit" disabled={uploading}>
+                  {uploading ? 'Adding…' : 'Add Video'}
+                </button>
               </form>
             </section>
 
@@ -382,11 +451,16 @@ export default function Admin() {
                         {video.published && (
                           <Link to="/videos" target="_blank">View</Link>
                         )}
-                        <button type="button" onClick={() => toggleVideoPublish(video)}>
+                        <button type="button" onClick={() => toggleVideoPublish(video)} disabled={isBusy}>
                           {video.published ? 'Unpublish' : 'Publish'}
                         </button>
-                        <button type="button" className="danger" onClick={() => handleDeleteVideo(video.id)}>
-                          Delete
+                        <button
+                          type="button"
+                          className="danger"
+                          onClick={() => openDeleteModal('video', video.id, video.title)}
+                          disabled={isBusy}
+                        >
+                          {deletingId === video.id ? 'Deleting…' : 'Delete'}
                         </button>
                       </div>
                     </li>
