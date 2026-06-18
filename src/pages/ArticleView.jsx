@@ -39,8 +39,9 @@ export default function ArticleView() {
     );
   }
 
-  const pdfViewUrl = getArticlePdfUrl(article.slug);
-  const pdfDownloadUrl = getArticlePdfUrl(article.slug, { download: true });
+  const pdfViewUrl = article.pdfUrl || getArticlePdfUrl(article.slug);
+  const pdfDownloadUrl = article.pdfDownloadUrl || getArticlePdfUrl(article.slug, { download: true });
+  const pdfFileName = article.pdfFile || `${article.slug}.pdf`;
 
   return (
     <Layout>
@@ -62,7 +63,7 @@ export default function ArticleView() {
             <a
               href={pdfDownloadUrl}
               className="article-view__download"
-              download
+              download={pdfFileName}
             >
               Download PDF
             </a>
@@ -71,6 +72,7 @@ export default function ArticleView() {
             url={pdfViewUrl}
             title={article.title}
             downloadUrl={pdfDownloadUrl}
+            fileName={pdfFileName}
           />
         </div>
       </section>

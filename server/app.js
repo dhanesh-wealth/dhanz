@@ -84,6 +84,30 @@ function authMiddleware(req, res, next) {
   next();
 }
 
+function getPdfProxyUrl(slug, download = false) {
+  const query = download ? '?download=1' : '';
+  return `/api/articles/${encodeURIComponent(slug)}/pdf${query}`;
+}
+
+function attachPdfProxy(article) {
+  if (!article?.slug) return article;
+  return {
+    ...article,
+    pdfUrl: getPdfProxyUrl(article.slug),
+    pdfDownloadUrl: getPdfProxyUrl(article.slug, true),
+  };
+}
+
+function attachPdfProxyList(articles) {
+  return articles.map(attachPdfProxy);
+}
+
+function buildContentDisposition(filename, disposition) {
+  const original = filename || 'article.pdf';
+  const fallback = original.replace(/[^\w.\-]/g, '_') || 'article.pdf';
+  return `${disposition}; filename="${fallback}"; filename*=UTF-8''${encodeURIComponent(original)}`;
+}
+
 const upload = multer({
   storage: multer.memoryStorage(),
   limits: { fileSize: MAX_PDF_BYTES },
@@ -139,7 +163,7 @@ async function fetchMarketRates() {
 
 app.get('/api/articles', async (_req, res) => {
   try {
-    res.json(await getPublishedArticles());
+    res.json(attachPdfProxyList(await getPublishedArticles()));
   } catch {
     res.status(500).json({ error: 'Failed to load articles' });
   }
@@ -162,12 +186,12 @@ app.get('/api/articles/:slug/pdf', async (req, res) => {
       return res.status(502).json({ error: 'Invalid PDF file' });
     }
 
-    const filename = (article.pdfFile || `${article.slug}.pdf`).replace(/[^\w.\-() ]/g, '_');
+    const filename = article.pdfFile || `${article.slug}.pdf`;
     const disposition = req.query.download === '1' ? 'attachment' : 'inline';
 
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Length', String(buffer.length));
-    res.setHeader('Content-Disposition', `${disposition}; filename="${filename}"`);
+    res.setHeader('Content-Disposition', buildContentDisposition(filename, disposition));
     res.setHeader('Cache-Control', 'public, max-age=3600');
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.end(buffer);
@@ -180,7 +204,7 @@ app.get('/api/articles/:slug', async (req, res) => {
   try {
     const article = await getArticleBySlug(req.params.slug);
     if (!article) return res.status(404).json({ error: 'Article not found' });
-    res.json(article);
+    res.json(attachPdfProxy(article));
   } catch {
     res.status(500).json({ error: 'Failed to load article' });
   }
@@ -188,7 +212,7 @@ app.get('/api/articles/:slug', async (req, res) => {
 
 app.get('/api/admin/articles', authMiddleware, async (_req, res) => {
   try {
-    res.json(await getAllArticles());
+    res.json(attachPdfProxyList(await getAllArticles()));
   } catch (err) {
     res.status(500).json({ error: err.message || 'Failed to load articles' });
   }
@@ -219,7 +243,7 @@ app.post('/api/admin/articles', authMiddleware, upload.single('pdf'), async (req
       filename: req.file.originalname || `article${extname(req.file.originalname) || '.pdf'}`,
     });
 
-    res.status(201).json(article);
+    res.status(201).json(attachPdfProxy(article));
   } catch (err) {
     res.status(500).json({ error: err.message || 'Failed to create article' });
   }
@@ -228,7 +252,7 @@ app.post('/api/admin/articles', authMiddleware, upload.single('pdf'), async (req
 app.patch('/api/admin/articles/:id', authMiddleware, async (req, res) => {
   try {
     const article = await updateArticle(req.params.id, req.body);
-    res.json(article);
+    res.json(attachPdfProxy(article));
   } catch (err) {
     res.status(500).json({ error: err.message || 'Failed to update article' });
   }
