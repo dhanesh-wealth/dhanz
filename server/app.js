@@ -158,13 +158,19 @@ app.get('/api/articles/:slug/pdf', async (req, res) => {
     }
 
     const buffer = Buffer.from(await pdfRes.arrayBuffer());
+    if (buffer.length < 4 || buffer.subarray(0, 4).toString() !== '%PDF') {
+      return res.status(502).json({ error: 'Invalid PDF file' });
+    }
+
     const filename = (article.pdfFile || `${article.slug}.pdf`).replace(/[^\w.\-() ]/g, '_');
     const disposition = req.query.download === '1' ? 'attachment' : 'inline';
 
     res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Length', String(buffer.length));
     res.setHeader('Content-Disposition', `${disposition}; filename="${filename}"`);
     res.setHeader('Cache-Control', 'public, max-age=3600');
-    res.send(buffer);
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.end(buffer);
   } catch {
     res.status(500).json({ error: 'Failed to load PDF' });
   }

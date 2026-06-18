@@ -23,7 +23,6 @@
     "framer-motion": "^12.40.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
-    "react-pdf": "^10.4.1",
     "react-router-dom": "^7.17.0",
     "serverless-http": "^3.2.0"
   },

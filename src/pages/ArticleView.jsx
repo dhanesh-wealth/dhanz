@@ -1,9 +1,7 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Layout, { PageHeader } from '../components/Layout';
-import PdfViewerErrorBoundary from '../components/PdfViewerErrorBoundary';
-
-const PdfViewer = lazy(() => import('../components/PdfViewer'));
+import PdfViewer from '../components/PdfViewer';
 import { fetchArticle, getArticlePdfUrl } from '../api/articles';
 import './ArticleView.css';
 
@@ -69,19 +67,11 @@ export default function ArticleView() {
               Download PDF
             </a>
           </div>
-          <PdfViewerErrorBoundary
+          <PdfViewer
             url={pdfViewUrl}
             title={article.title}
             downloadUrl={pdfDownloadUrl}
-          >
-            <Suspense fallback={<div className="article-view__status">Loading PDF viewer…</div>}>
-              <PdfViewer
-                url={pdfViewUrl}
-                title={article.title}
-                downloadUrl={pdfDownloadUrl}
-              />
-            </Suspense>
-          </PdfViewerErrorBoundary>
+          />
         </div>
       </section>
     </Layout>
