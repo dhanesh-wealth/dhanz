@@ -19,6 +19,9 @@ dist-ssr
 # Sanity
 sanity/dist/
 
+# Local PDF diagnostics (npm run check:pdf)
+tmp-*.pdf
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

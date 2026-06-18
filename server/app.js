@@ -91,8 +91,10 @@ function getPdfProxyUrl(slug, download = false) {
 
 function attachPdfProxy(article) {
   if (!article?.slug) return article;
+  const sanityPdfUrl = article.pdfUrl?.startsWith('http') ? article.pdfUrl : article.sanityPdfUrl;
   return {
     ...article,
+    sanityPdfUrl,
     pdfUrl: getPdfProxyUrl(article.slug),
     pdfDownloadUrl: getPdfProxyUrl(article.slug, true),
   };

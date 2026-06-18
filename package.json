@@ -15,7 +15,8 @@
     "start": "node server/index.js",
     "dev:netlify": "netlify dev",
     "deploy:studio": "npm run deploy --prefix sanity",
-    "optimize:heroes": "node scripts/optimize-hero-images.mjs"
+    "optimize:heroes": "node scripts/optimize-hero-images.mjs",
+    "check:pdf": "node scripts/check-pdf.mjs"
   },
   "dependencies": {
     "@sanity/client": "^7.16.0",

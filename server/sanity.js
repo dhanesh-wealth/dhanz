@@ -143,12 +143,26 @@ export async function slugExists(slug) {
   return count > 0;
 }
 
+import { verifySanityUpload } from './pdfValidation.js';
+
 export async function createArticle({ title, slug, description, published, pdfBuffer, filename }) {
   const client = writeClient();
   const asset = await client.assets.upload('file', pdfBuffer, {
     filename,
     contentType: 'application/pdf',
   });
+
+  let integrity;
+  try {
+    integrity = await verifySanityUpload(pdfBuffer, asset.url);
+  } catch (err) {
+    try {
+      await client.delete(asset._id);
+    } catch {
+      /* ignore cleanup failure */
+    }
+    throw err;
+  }
 
   const now = new Date().toISOString();
   const doc = await client.create({
@@ -170,6 +184,8 @@ export async function createArticle({ title, slug, description, published, pdfBu
     pdfUrl: asset.url,
     pdfFile: filename,
     createdAt: now,
+    pdfSha256: integrity.sha256,
+    pdfBytes: integrity.bytes,
   });
 }
 
